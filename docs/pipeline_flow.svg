@@ -1,98 +1,104 @@
-<svg viewBox="0 0 1500 320" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<svg viewBox="0 0 1500 340" xmlns="http://www.w3.org/2000/svg" font-family="Cascadia Code, Consolas, Segoe UI, monospace">
   <defs>
-    <linearGradient id="pfBg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#F4FBFA"/>
-      <stop offset="100%" stop-color="#EFEDFB"/>
+    <linearGradient id="tsBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0A0E14"/>
+      <stop offset="100%" stop-color="#141B2E"/>
     </linearGradient>
-    <filter id="pfShadow" x="-30%" y="-30%" width="160%" height="160%">
-      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#1F2937" flood-opacity="0.10"/>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
     </filter>
     <style>
-      .stage-label { font-size: 19px; font-weight: 800; fill: #1F2937; }
-      .stage-sub { font-size: 11.5px; fill: #4B5563; }
-      .breathe { animation: breathe 2.6s ease-in-out infinite; }
-      @keyframes breathe {
-        0%   { transform: scale(1); }
-        50%  { transform: scale(1.015); }
-        100% { transform: scale(1); }
+      .stage-label { font-size: 18px; font-weight: 700; }
+      .stage-sub { font-size: 11px; fill: #9CA8C4; }
+      .pulse { animation: pulseGlow 2.6s ease-in-out infinite; }
+      @keyframes pulseGlow {
+        0%   { opacity: 0.75; }
+        50%  { opacity: 1; }
+        100% { opacity: 0.75; }
       }
     </style>
   </defs>
 
-  <rect width="1500" height="320" rx="20" fill="url(#pfBg)"/>
+  <rect width="1500" height="340" rx="18" fill="url(#tsBg)" stroke="#26324A"/>
+
+  <text x="30" y="34" font-size="13" fill="#FFB020" letter-spacing="1px">$ dbt build --select bronze+ silver+ gold+</text>
 
   <!-- S3 -->
-  <g class="breathe" filter="url(#pfShadow)" style="transform-origin: 110px 160px;">
-    <rect x="20" y="110" width="180" height="100" rx="18" fill="#ffffff" stroke="#B7EDEA" stroke-width="2"/>
-    <rect x="20" y="110" width="180" height="6" rx="3" fill="#0EA5A5"/>
-    <text class="stage-label" x="110" y="152" text-anchor="middle">AWS S3</text>
-    <text class="stage-sub" x="110" y="174" text-anchor="middle">Raw CSVs / Staging</text>
+  <g class="pulse" filter="url(#glow)">
+    <rect x="20" y="120" width="170" height="100" rx="10" fill="none" stroke="#FFB020" stroke-width="1.5"/>
+    <text class="stage-label" x="105" y="158" text-anchor="middle" fill="#FFB020">S3</text>
+    <text class="stage-sub" x="105" y="180" text-anchor="middle">Data Lake</text>
+    <text class="stage-sub" x="105" y="196" text-anchor="middle">listings/bookings/hosts.csv</text>
   </g>
 
-  <!-- Snowflake Bronze -->
-  <g class="breathe" filter="url(#pfShadow)" style="transform-origin: 370px 160px; animation-delay: 0.2s;">
-    <rect x="270" y="110" width="200" height="100" rx="18" fill="#ffffff" stroke="#FFE1B8" stroke-width="2"/>
-    <rect x="270" y="110" width="200" height="6" rx="3" fill="#F5A623"/>
-    <text class="stage-label" x="370" y="147" text-anchor="middle">Snowflake</text>
-    <text class="stage-sub" x="370" y="169" text-anchor="middle">Bronze Layer</text>
-    <text class="stage-sub" x="370" y="186" text-anchor="middle">Data Quality Checks</text>
+  <!-- Snowflake staging -->
+  <g class="pulse" filter="url(#glow)" style="animation-delay:0.2s;">
+    <rect x="255" y="110" width="200" height="120" rx="10" fill="none" stroke="#2DD4BF" stroke-width="1.5"/>
+    <text class="stage-label" x="355" y="145" text-anchor="middle" fill="#2DD4BF">STAGING</text>
+    <text class="stage-sub" x="355" y="165" text-anchor="middle">External Stage · SNOW_STAGE</text>
+    <text class="stage-sub" x="355" y="181" text-anchor="middle">CSV_FORMAT</text>
+    <text class="stage-sub" x="355" y="197" text-anchor="middle">COPY INTO</text>
   </g>
 
-  <!-- dbt OBT + Metadata -->
-  <g class="breathe" filter="url(#pfShadow)" style="transform-origin: 655px 160px; animation-delay: 0.4s;">
-    <rect x="540" y="90" width="230" height="140" rx="18" fill="#ffffff" stroke="#D9D4FB" stroke-width="2"/>
-    <rect x="540" y="90" width="230" height="6" rx="3" fill="#7C6FF0"/>
-    <text class="stage-label" x="655" y="122" text-anchor="middle">dbt</text>
-    <text class="stage-sub" x="655" y="145" text-anchor="middle">One Big Table (OBT)</text>
-    <text class="stage-sub" x="655" y="163" text-anchor="middle">YAML-Driven Pipeline</text>
-    <text class="stage-sub" x="655" y="181" text-anchor="middle">Audit &amp; Logging</text>
-    <text class="stage-sub" x="655" y="199" text-anchor="middle">Metadata-Driven</text>
+  <!-- Bronze -->
+  <g class="pulse" filter="url(#glow)" style="animation-delay:0.4s;">
+    <rect x="520" y="100" width="210" height="140" rx="10" fill="none" stroke="#FF5C5C" stroke-width="1.5"/>
+    <text class="stage-label" x="625" y="132" text-anchor="middle" fill="#FF5C5C">BRONZE</text>
+    <text class="stage-sub" x="625" y="154" text-anchor="middle">dbt sources.yml</text>
+    <text class="stage-sub" x="625" y="170" text-anchor="middle">is_incremental() · created_at</text>
+    <text class="stage-sub" x="625" y="186" text-anchor="middle">generate_schema_name macro</text>
+    <text class="stage-sub" x="625" y="202" text-anchor="middle">Raw DAG Lineage</text>
   </g>
 
-  <!-- Star Schema + Security -->
-  <g class="breathe" filter="url(#pfShadow)" style="transform-origin: 955px 160px; animation-delay: 0.6s;">
-    <rect x="840" y="90" width="230" height="140" rx="18" fill="#ffffff" stroke="#FFD3CB" stroke-width="2"/>
-    <rect x="840" y="90" width="230" height="6" rx="3" fill="#FF6F59"/>
-    <text class="stage-label" x="955" y="125" text-anchor="middle">Star Schema</text>
-    <text class="stage-sub" x="955" y="148" text-anchor="middle">Fact + Dimension Tables</text>
-    <text class="stage-sub" x="955" y="166" text-anchor="middle">SCD Type 2</text>
-    <text class="stage-sub" x="955" y="184" text-anchor="middle">Row-Level Security</text>
-    <text class="stage-sub" x="955" y="202" text-anchor="middle">GitHub + Snowflake</text>
+  <!-- Silver -->
+  <g class="pulse" filter="url(#glow)" style="animation-delay:0.6s;">
+    <rect x="800" y="90" width="220" height="160" rx="10" fill="none" stroke="#34D399" stroke-width="1.5"/>
+    <text class="stage-label" x="910" y="120" text-anchor="middle" fill="#34D399">SILVER</text>
+    <text class="stage-sub" x="910" y="142" text-anchor="middle">merge/upsert · unique_key</text>
+    <text class="stage-sub" x="910" y="158" text-anchor="middle">macro: multiply()</text>
+    <text class="stage-sub" x="910" y="174" text-anchor="middle">macro: tag() price tiers</text>
+    <text class="stage-sub" x="910" y="190" text-anchor="middle">sanitize · CASE WHEN status</text>
+    <text class="stage-sub" x="910" y="206" text-anchor="middle">booking_id / listing_id / host_id</text>
   </g>
 
-  <!-- Power BI -->
-  <g class="breathe" filter="url(#pfShadow)" style="transform-origin: 1250px 160px; animation-delay: 0.8s;">
-    <rect x="1140" y="110" width="220" height="100" rx="18" fill="#ffffff" stroke="#B7EDEA" stroke-width="2"/>
-    <rect x="1140" y="110" width="220" height="6" rx="3" fill="#0EA5A5"/>
-    <text class="stage-label" x="1250" y="150" text-anchor="middle">Power BI</text>
-    <text class="stage-sub" x="1250" y="172" text-anchor="middle">Executive Dashboards</text>
-    <text class="stage-sub" x="1250" y="189" text-anchor="middle">Drill-Down Analysis</text>
+  <!-- Gold -->
+  <g class="pulse" filter="url(#glow)" style="animation-delay:0.8s;">
+    <rect x="1100" y="80" width="240" height="180" rx="10" fill="none" stroke="#818CF8" stroke-width="1.5"/>
+    <text class="stage-label" x="1220" y="110" text-anchor="middle" fill="#818CF8">GOLD</text>
+    <text class="stage-sub" x="1220" y="132" text-anchor="middle">OBT · metadata-driven joins</text>
+    <text class="stage-sub" x="1220" y="148" text-anchor="middle">ephemeral/ CTE models</text>
+    <text class="stage-sub" x="1220" y="164" text-anchor="middle">dim_bookings · dim_hosts</text>
+    <text class="stage-sub" x="1220" y="180" text-anchor="middle">dim_listings (SCD-2 snapshots)</text>
+    <text class="stage-sub" x="1220" y="196" text-anchor="middle">fact_table · surrogate keys</text>
+    <text class="stage-sub" x="1220" y="212" text-anchor="middle">dbt_valid_from / dbt_valid_to</text>
   </g>
 
-  <!-- Connector paths -->
-  <path id="path1" d="M200,160 L270,160" stroke="#C7CDD6" stroke-width="2" fill="none"/>
-  <path id="path2" d="M470,160 L540,160" stroke="#C7CDD6" stroke-width="2" fill="none"/>
-  <path id="path3" d="M770,160 L840,160" stroke="#C7CDD6" stroke-width="2" fill="none"/>
-  <path id="path4" d="M1070,160 L1140,160" stroke="#C7CDD6" stroke-width="2" fill="none"/>
+  <!-- Connectors -->
+  <path d="M190,170 L255,170" stroke="#2A3555" stroke-width="2" fill="none"/>
+  <path d="M455,170 L520,170" stroke="#2A3555" stroke-width="2" fill="none"/>
+  <path d="M730,170 L800,170" stroke="#2A3555" stroke-width="2" fill="none"/>
+  <path d="M1020,170 L1100,170" stroke="#2A3555" stroke-width="2" fill="none"/>
 
-  <!-- Flowing data particles -->
-  <circle r="6" fill="#7C6FF0">
-    <animateMotion dur="1.6s" repeatCount="indefinite" path="M200,160 L270,160"/>
+  <circle r="5" fill="#FFB020">
+    <animateMotion dur="1.5s" repeatCount="indefinite" path="M190,170 L255,170"/>
   </circle>
-  <circle r="6" fill="#7C6FF0">
-    <animateMotion dur="1.8s" begin="0.4s" repeatCount="indefinite" path="M470,160 L540,160"/>
+  <circle r="5" fill="#2DD4BF">
+    <animateMotion dur="1.6s" begin="0.3s" repeatCount="indefinite" path="M455,170 L520,170"/>
   </circle>
-  <circle r="6" fill="#7C6FF0">
-    <animateMotion dur="1.8s" begin="0.8s" repeatCount="indefinite" path="M770,160 L840,160"/>
+  <circle r="5" fill="#FF5C5C">
+    <animateMotion dur="1.7s" begin="0.6s" repeatCount="indefinite" path="M730,170 L800,170"/>
   </circle>
-  <circle r="6" fill="#7C6FF0">
-    <animateMotion dur="1.6s" begin="1.2s" repeatCount="indefinite" path="M1070,160 L1140,160"/>
+  <circle r="5" fill="#34D399">
+    <animateMotion dur="1.6s" begin="0.9s" repeatCount="indefinite" path="M1020,170 L1100,170"/>
   </circle>
 
-  <!-- Bottom labels -->
-  <text x="110" y="255" text-anchor="middle" font-size="12" fill="#6B7280">1 · Ingest</text>
-  <text x="370" y="255" text-anchor="middle" font-size="12" fill="#6B7280">2 · Land &amp; Validate</text>
-  <text x="655" y="255" text-anchor="middle" font-size="12" fill="#6B7280">3 · Transform</text>
-  <text x="955" y="255" text-anchor="middle" font-size="12" fill="#6B7280">4 · Model &amp; Secure</text>
-  <text x="1250" y="255" text-anchor="middle" font-size="12" fill="#6B7280">5 · Visualize</text>
+  <text x="105" y="285" text-anchor="middle" font-size="11" fill="#6B7896">1 · Land</text>
+  <text x="355" y="285" text-anchor="middle" font-size="11" fill="#6B7896">2 · Stage &amp; Load</text>
+  <text x="625" y="285" text-anchor="middle" font-size="11" fill="#6B7896">3 · Ingest</text>
+  <text x="910" y="285" text-anchor="middle" font-size="11" fill="#6B7896">4 · Conform</text>
+  <text x="1220" y="285" text-anchor="middle" font-size="11" fill="#6B7896">5 · Model &amp; Serve</text>
 </svg>
