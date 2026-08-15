@@ -1,0 +1,92 @@
+<svg viewBox="0 0 1200 420" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <defs>
+    <linearGradient id="cardShadow" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#000000" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="lollipopGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#12239E"/>
+      <stop offset="100%" stop-color="#118DFF"/>
+    </linearGradient>
+    <style>
+      .ring-track { fill: none; stroke: #eef1f6; stroke-width: 10; }
+      .ring-fill  { fill: none; stroke-width: 10; stroke-linecap: round; }
+      .kpi-label { font-size: 12px; font-weight: 700; letter-spacing: 0.6px; fill: #6b7280; }
+      .kpi-value { font-size: 24px; font-weight: 800; fill: #111827; }
+      .section-label { font-size: 13px; font-weight: 700; letter-spacing: 0.6px; fill: #6b7280; }
+
+    </style>
+  </defs>
+
+  <rect width="1200" height="420" rx="22" fill="#ffffff" stroke="#e7eaf0"/>
+
+  <!-- Title -->
+  <text x="44" y="52" font-size="24" font-weight="800" fill="#111827">Airbnb Performance — At a Glance</text>
+  <text x="44" y="76" font-size="13" fill="#6b7280">Live metrics from the Gold-layer Star Schema, surfaced in Power BI</text>
+
+  <!-- KPI ring cards -->
+  <!-- Revenue -->
+  <g transform="translate(80,175)">
+    <rect x="-70" y="-70" width="240" height="150" rx="18" fill="#fbfbfd" stroke="#eef1f6"/>
+    <circle class="ring-track" cx="30" cy="0" r="42"/>
+    <circle class="ring-fill" cx="30" cy="0" r="42" stroke="#118DFF"
+            stroke-dasharray="263.9" stroke-dashoffset="0" transform="rotate(-90 30 0)"/>
+    <text x="30" y="6" text-anchor="middle" font-size="14" font-weight="800" fill="#118DFF">100%</text>
+    <text class="kpi-value" x="105" y="-8">62.53M</text>
+    <text class="kpi-label" x="105" y="14">TOTAL REVENUE</text>
+  </g>
+
+  <!-- Bookings -->
+  <g transform="translate(370,175)">
+    <rect x="-70" y="-70" width="240" height="150" rx="18" fill="#fbfbfd" stroke="#eef1f6"/>
+    <circle class="ring-track" cx="30" cy="0" r="42"/>
+    <circle class="ring-fill" cx="30" cy="0" r="42" stroke="#D9B300"
+            stroke-dasharray="263.9" stroke-dashoffset="79.2" transform="rotate(-90 30 0)"/>
+    <text x="30" y="6" text-anchor="middle" font-size="14" font-weight="800" fill="#D9B300">70%</text>
+    <text class="kpi-value" x="105" y="-8">5K</text>
+    <text class="kpi-label" x="105" y="14">TOTAL BOOKINGS</text>
+  </g>
+
+  <!-- Listings -->
+  <g transform="translate(660,175)">
+    <rect x="-70" y="-70" width="240" height="150" rx="18" fill="#fbfbfd" stroke="#eef1f6"/>
+    <circle class="ring-track" cx="30" cy="0" r="42"/>
+    <circle class="ring-fill" cx="30" cy="0" r="42" stroke="#59A472"
+            stroke-dasharray="263.9" stroke-dashoffset="116.1" transform="rotate(-90 30 0)"/>
+    <text x="30" y="6" text-anchor="middle" font-size="14" font-weight="800" fill="#59A472">56%</text>
+    <text class="kpi-value" x="105" y="-8">500</text>
+    <text class="kpi-label" x="105" y="14">TOTAL LISTINGS</text>
+  </g>
+
+  <!-- Hosts -->
+  <g transform="translate(950,175)">
+    <rect x="-70" y="-70" width="240" height="150" rx="18" fill="#fbfbfd" stroke="#eef1f6"/>
+    <circle class="ring-track" cx="30" cy="0" r="42"/>
+    <circle class="ring-fill" cx="30" cy="0" r="42" stroke="#E66C37"
+            stroke-dasharray="263.9" stroke-dashoffset="153.1" transform="rotate(-90 30 0)"/>
+    <text x="30" y="6" text-anchor="middle" font-size="14" font-weight="800" fill="#E66C37">42%</text>
+    <text class="kpi-value" x="105" y="-8">189</text>
+    <text class="kpi-label" x="105" y="14">TOTAL HOSTS</text>
+  </g>
+
+  <!-- Revenue by property type — lollipop chart -->
+  <text class="section-label" x="44" y="290">REVENUE BY PROPERTY TYPE</text>
+
+  <text x="44" y="325" font-size="13" fill="#374151">House</text>
+  <line x1="150" y1="320" x2="930" y2="320" stroke="#eef1f6" stroke-width="4"/>
+  <line x1="150" y1="320" x2="930" y2="320" stroke="url(#lollipopGrad)" stroke-width="4"/>
+  <circle class="lolli-dot" cx="930" cy="320" r="7" fill="#118DFF"/>
+  <text x="950" y="325" font-size="13" font-weight="700" fill="#111827">21.5M</text>
+
+  <text x="44" y="360" font-size="13" fill="#374151">Condo</text>
+  <line x1="150" y1="355" x2="915" y2="355" stroke="#eef1f6" stroke-width="4"/>
+  <line x1="150" y1="355" x2="915" y2="355" stroke="url(#lollipopGrad)" stroke-width="4"/>
+  <circle class="lolli-dot" cx="915" cy="355" r="7" fill="#118DFF"/>
+  <text x="935" y="360" font-size="13" font-weight="700" fill="#111827">21.1M</text>
+
+  <text x="44" y="395" font-size="13" fill="#374151">Apartment</text>
+  <line x1="150" y1="390" x2="872" y2="390" stroke="#eef1f6" stroke-width="4"/>
+  <line x1="150" y1="390" x2="872" y2="390" stroke="url(#lollipopGrad)" stroke-width="4"/>
+  <circle class="lolli-dot" cx="872" cy="390" r="7" fill="#118DFF"/>
+  <text x="892" y="395" font-size="13" font-weight="700" fill="#111827">19.9M</text>
+</svg>
